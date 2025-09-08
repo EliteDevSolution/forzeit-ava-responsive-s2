@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+/* theme tokens  */
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+
+  --color-ava-body:    #2C2D31;
+  --color-ava-card:    #2C2D31;
+  --color-ava-text:    #E9EAEA;
+  --color-ava-sub:     #A1B0AB;
+  --color-ava-mint:    #6AF2C4;
+  --color-ava-mint-d:  #2E9C88;
+  --color-ava-inner:   #1E2024;
+  --color-ava-ring:    #4E9D8F;
+  --color-ava-gold:    #E0C877;
+  --color-ava-divider: #6E6738;
+  --color-ava-btntext: #14171B;
+
+  --radius-panel: 22px;
+  --shadow-btn: inset 0 1px 2px rgba(0,0,0,.25), 0 10px 26px rgba(106,242,196,.18);
+  --track-title: .18em;
+  --track-label: .14em;
+}
+
+/* utilities */
+@utility k-title { letter-spacing: var(--track-title); }
+@utility k-label { font-size: 10px; letter-spacing: var(--track-label); }
+@utility text-shadow { text-shadow: 0 1px 0 rgba(0,0,0,.25), 0 8px 30px rgba(0,0,0,.35); }
+@utility mask-soft { mask: radial-gradient(closest-side, #000 72%, transparent 78%); }
+
+@layer base {
+  html, body { height: 100%; }
+}
+
+@layer components {
+  .card-panel { @apply bg-ava-card text-ava-text rounded-[var(--radius-panel)] border border-ava-ring/30 p-6 md:p-8 lg:p-10; }
+  .page-header { @apply flex items-center gap-3 sm:gap-5 mb-4; }
+  .page-logo   { @apply shrink-0 select-none text-ava-mint leading-none text-[64px] sm:text-[68px] md:text-[72px] -translate-y-1; }
+  .page-title  { @apply text-[20px] sm:text-[22px] md:text-[24px] font-extrabold k-title text-shadow; }
+  .page-sub    { @apply text-[15px] sm:text-[16px] md:text-[18px] text-ava-mint mt-0.5; }
+
+  .kpi-hero   { @apply grid grid-cols-1 items-center justify-items-center gap-4 sm:gap-6 lg:gap-8 @sm:grid-cols-[auto_1fr_auto] @sm:justify-items-stretch; }
+  .kpi-group  { @apply justify-self-center w-full max-w-max flex items-center justify-center gap-4; }
+  .kpi-percent{ @apply text-4xl font-medium tabular-nums; }
+  .kpi-trend  { @apply place-self-center @sm:place-self-auto flex items-center gap-5 justify-center @sm:justify-start mt-4 @sm:mt-0; }
+
+  .metrics      { @apply grid grid-cols-2 lg:grid-cols-4 gap-2; }
+  .metric       { @apply text-center p-3 rounded-xl border border-ava-ring/10; }
+  .metric-title { @apply k-label uppercase text-ava-gold whitespace-nowrap pb-[2px]; }
+  .metric-value { @apply mt-0.5 text-[20px] md:text-[22px] font-extrabold; }
+
+  .btn         { @apply inline-flex items-center justify-center rounded-full font-extrabold tracking-[.12em] transition-[transform,filter] duration-150; }
+  .btn-primary { @apply bg-ava-mint text-ava-btntext shadow-[var(--shadow-btn)] hover:brightness-110 active:translate-y-[1px] whitespace-nowrap;  }
+  .btn-secondary { @apply bg-ava-inner border border-ava-ring/60 text-ava-text hover:brightness-110 active:translate-y-[1px]; }
+  .btn-md      { @apply px-8 sm:px-10 md:px-12 py-2.5 text-[12px] sm:text-[13px]; }
+  .btn-lg      { @apply px-16 sm:px-20 md:px-24 py-3.5; }
+  .btn:focus-visible { @apply outline-none ring-3 ring-ava-mint/60; }
+
+  .comet { --tail: 20deg; --sweep: calc(var(--p) * 3.6deg); border-radius: 9999px; position: relative; }
+  .comet::after { content: ""; position: absolute; inset: 0px; border-radius: inherit; background: conic-gradient( from -90deg, var(--color-ava-mint) 0deg calc(var(--sweep) - var(--tail)), rgba(106,242,196,.1) var(--sweep), transparent 30deg, rgba(106,242,196,.0) calc(var(--sweep) - var(--tail)) calc(var(--sweep) - 10deg) ); filter: drop-shadow(0 0 14px rgba(106,242,196,.46)); }
+  .comet > span { position: absolute; inset: 18px; background: var(--color-ava-inner); border-radius: inherit; z-index: 1; }
+
+  .goals-wrap { @apply grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-4; }
+  .goal { @apply relative flex items-center gap-3 rounded-xl border border-ava-ring/50 bg-ava-inner/70 px-3.5 py-2.5; }
+  .goal:hover { @apply bg-ava-inner; }
+  .goal-title { @apply text-[12.5px] sm:text-[13px] tracking-[.02em] whitespace-nowrap overflow-hidden text-ellipsis; }
+  .goal-icon  { @apply grid place-items-center shrink-0 size-6 rounded-full border; }
+  .goal-close { @apply ms-auto grid place-items-center size-6 rounded-full text-ava-mint hover:brightness-110; }
+
+  .section-lead { @apply text-[18px] sm:text-[15px] font-extrabold tracking-[.02em]; }
+  .section-sub  { @apply text-[13px] sm:text-[14px] text-ava-sub mt-1 max-w-[56ch]; }
+
+  .pct-list { @apply grid grid-cols-5 gap-x-8 sm:gap-x-12 md:gap-x-16 mt-6; }
+  .pct-item { @apply text-center text-[20px] sm:text-[22px] md:text-[24px] font-semibold; }
+
+  .tasks-grid { @apply grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-5; }
+  .task-chip  { @apply flex items-center gap-3 rounded-2xl bg-white text-[#1a1c1f] shadow-[0_1px_0_rgba(0,0,0,.05),0_2px_10px_rgba(0,0,0,.18)] border border-ava-ring/20 px-3.5 py-2.5; }
+  .emoji-badge{ @apply grid place-items-center shrink-0 size-8; }
+  .task-text  { @apply text-[13px] leading-tight; }
+  .task-more  { @apply ms-auto grid place-items-center size-7 min-w-7 hover:rounded-full hover:bg-white hover:border hover:border-ava-ring/60 hover:text-[#1a1c1f]}
+}

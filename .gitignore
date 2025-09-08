@@ -1,0 +1,18 @@
+# dependencies
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# build
+dist/
+.cache/
+.temp/
+
+# editor
+.vscode/
+.idea/
+
+# system
+.DS_Store
+Thumbs.db
